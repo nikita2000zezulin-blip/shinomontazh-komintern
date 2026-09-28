@@ -184,3 +184,10 @@ body { background: var(--asphalt); color: var(--line); font: 400 17px/1.6 var(--
   .services, .book, .reviews, .season { padding: 72px 0; }
   .form { padding: 22px; box-shadow: 5px 5px 0 var(--rubber); }
 }
+
+/* Фон секции: ИИ-текстура (Cloudflare Workers AI) под заливкой цвета сайта — декор, не фото бизнеса.
+   На компьютере картинка закреплена за окном — при прокрутке секция работает как окно (параллакс). */
+.services { background: linear-gradient(color-mix(in srgb, var(--asphalt-2) 66%, transparent), color-mix(in srgb, var(--asphalt-2) 86%, transparent)), url('img/bg-services.webp') center / cover var(--asphalt-2); }
+@media (hover: hover) and (pointer: fine) {
+  .services { background-attachment: scroll, fixed; }
+}
