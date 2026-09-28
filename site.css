@@ -68,6 +68,14 @@ body { background: var(--asphalt); color: var(--line); font: 400 17px/1.6 var(--
 .wheel__ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: roll 60s linear infinite; }
 .wheel__ring text { font: 400 22px var(--display); fill: currentColor; }
 @keyframes roll { to { transform: rotate(360deg); } }
+/* Фишка: при прокрутке колесо катится, надпись крутится навстречу. rotate складывается с transform из roll. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .wheel__photo { animation: tire linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    .wheel__ring { animation: roll 60s linear infinite, tire linear both reverse; animation-timeline: auto, scroll(root); animation-range: normal, 0 100vh; }
+    @keyframes tire { to { rotate: 1turn; } }
+  }
+}
 .road { height: 26px; background: var(--rubber); position: relative; }
 .road::after { content: ''; position: absolute; left: 0; right: 0; top: 11px; height: 4px; background: repeating-linear-gradient(90deg, var(--line) 0 60px, transparent 60px 110px); opacity: .85; }
 
